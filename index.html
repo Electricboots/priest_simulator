@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>World of Warcrap</title>
+<script>
+String.prototype.endsWith = function (s) {
+    if ('string' != typeof s) {
+        throw('IllegalArgumentException: Must pass a ' +
+            ' string to String.prototype.endsWith()');
+    }
+    var start = this.length - s.length;
+    return this.substring(start) == s;
+};
+
+new Image().src="low.gif";
+new Image().src="full.gif";
+new Image().src="dead.gif";
+
+var mana=35;
+var alive=new Array();
+var prev_i=0;
+
+function warcrap_start()
+{
+  window.status="Just like healing in WoW but without that annoying background clutter!";
+  var chat=document.getElementById("chat");
+  setTimeout('tick()',1000);
+}
+function tick()
+{
+  if(document.getElementById(alive[prev_i]).src.endsWith("low.gif"))
+  {
+    document.getElementById(alive[prev_i]).src="dead.gif";
+    alive.splice(prev_i,1);
+    if(alive.length==0)chat.innerHTML=chat.innerHTML+"[Noob]: WTF wipe fuking newb preist!11<br><font color=\"#ffff00\">You have been removed from the group.<br>Yourname has been removed from the guild by Noob.</font>";
+  }
+  var n=Math.floor(Math.random()*alive.length);
+  document.getElementById(alive[n]).src="low.gif";
+  if(mana==0)document.getElementById("mana").style.display="none"; //workaround to IE table problem
+  else document.getElementById("mana").width=mana*5;
+  r=Math.random();
+  if(r<.075)
+    chat.innerHTML=chat.innerHTML+"[Noob]: HEAL ME<br>";
+  else if(r<.15)chat.innerHTML=chat.innerHTML+"[Noob]: HAEL<br>";
+  else if(r<.175)chat.innerHTML=chat.innerHTML+"[Noob] Whispers: FORT<br>";
+  else if(r<.2)chat.innerHTML=chat.innerHTML+"[Noob]: coudl i get stm bff plz<br>";
+  else if(r<.225)chat.innerHTML=chat.innerHTML+"[Noob Hunter] Whispers: spi buff pet plz<br>";
+  else if(r<.3)chat.innerHTML=chat.innerHTML+"[Noob Warlock]: shield so i cna hellfire<br>";
+  else if(r<.375&&alive.length<40)chat.innerHTML=chat.innerHTML+"[Noob rogue]: OMFG kick the fucking nub priest, he let me die<br>";
+  else if(r<.45&&alive.length<40)chat.innerHTML=chat.innerHTML+"[Noob] Whispers: OMG I DIED NOOB<br>";
+  prev_i=n;
+  setTimeout('tick()',750);
+}
+</script>
+</head>
+<body onload="warcrap_start();">
+<center>
+Just like healing in WoW but without that annoying background clutter!<br>
+<script>
+for(var y=0;y<4;y++)
+{
+  for(var x=0;x<10;x++)
+  {
+    document.write("<img id=\""+x+"_"+y+"\" onclick=\"if((this.src.endsWith(\'low.gif\'))&&mana>0){this.src=\'full.gif\';mana--;}\" src=\"full.gif\"></img>");
+    alive.push(x+"_"+y);
+  }
+  document.write("<br>\n");
+}
+</script>
+<br>
+<table border=0 cellspacing=0 cellpadding=0 width=177 height=17><tr><td>
+
+<table border=0 cellspacing=0 cellpadding=0 id="mana" width=175 height=15>
+<tr><td bgcolor="#0000ff"></td></tr>
+</table></td></tr></table><br>Click a noob to heal.
+</center>
+<br><br><br>
+<span id="chat"></span>
+<br><br><br><br><center><font size=2>Copyright &copy;2005 Jonathan Challinger (Ralnoth of Kil'Jaeden in-game)<br>Please post comments <a 
+href="http://forums.worldofwarcraft.com/thread.aspx?fn=wow-priest&t=430290&p=1">here</a>.</font><br>
+<br>
+<script>
+if(navigator.appName == "Microsoft Internet Explorer")document.write("<a href=\"http://www.spreadfirefox.com/?q=affiliates&amp;id=0&amp;t=51\"><img border=\"0\" alt=\"Get Firefox!\" title=\"Get Firefox!\" src=\"http://sfx-images.mozilla.org/affiliates/Banners/120x600/rediscover.png\"/><br>You're using Internet Explorer, which SUCKS. Get Firefox, n00b.</a>"); </script> </center> </body>
+</html>
+
